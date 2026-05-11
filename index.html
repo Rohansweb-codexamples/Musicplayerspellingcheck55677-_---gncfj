@@ -10,29 +10,40 @@
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
+  }
+
+  img {
+    width: 220px;
+    height: 220px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 15px;
   }
 
   audio {
     width: 100%;
-    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .btn {
     width: 100%;
-    padding: 40px;
-    margin: 20px 0;
-    font-size: 40px;
+    padding: 22px;
+    margin: 10px 0;
+    font-size: 28px;
     font-weight: bold;
     border: none;
     border-radius: 10px;
-    background: #333;
-    color: white;
     cursor: pointer;
+    color: white;
   }
 
+  .red { background: #b30000; }
+  .blue { background: #0044cc; }
+  .green { background: #008f39; }
+
   .btn:active {
-    background: #555;
+    opacity: 0.7;
   }
 </style>
 
@@ -41,28 +52,42 @@
 
 <h1>Music Player</h1>
 
+<!-- Album Art -->
+<img id="art" src="https://via.placeholder.com/220" alt="Album Art">
+
+<!-- Audio Player -->
 <audio id="player" controls></audio>
 
-<button class="btn" onclick="playTrack(1)">TRACK 1</button>
-<button class="btn" onclick="playTrack(2)">TRACK 2</button>
-<button class="btn" onclick="playTrack(3)">TRACK 3</button>
-<button class="btn" onclick="playTrack(4)">TRACK 4</button>
-<button class="btn" onclick="playTrack(5)">TRACK 5</button>
+<!-- Buttons -->
+<button class="btn red" onclick="playTrack(1)">TRACK 1</button>
+<button class="btn blue" onclick="playTrack(2)">TRACK 2</button>
+<button class="btn green" onclick="playTrack(4)">TRACK 4</button>
 
 <script>
 const BASE = "https://rohansweb-codexamples.github.io/Musicplayerspellingcheck55677-_---gncfj/";
 
 const tracks = {
-  1: "mashup-aimashupmaker-1778513456891900046.mp3",
-  2: "screenrecorder-20260511-161025.mp3",
-  3: "Rapture%20Original%20Extended%20Mix%20feat%20Nadia%20Ali.mp3",
-  4: "Neon_Dreams_Accelerate%20(Extended).mp3",
-  5: "16.1s%20Recording%20(Dec%2028%20@%2012_05%20PM)%20(Cover).mp3"
+  1: {
+    file: "mashup-aimashupmaker-1778513456891900046.mp3",
+    art: "https://via.placeholder.com/220/ff4444/ffffff?text=Track+1"
+  },
+  2: {
+    file: "screenrecorder-20260511-161025.mp3",
+    art: "https://via.placeholder.com/220/4444ff/ffffff?text=Track+2"
+  },
+  4: {
+    file: "Neon_Dreams_Accelerate%20(Extended).mp3",
+    art: "https://via.placeholder.com/220/22aa55/ffffff?text=Track+4"
+  }
 };
 
 function playTrack(n) {
   const player = document.getElementById("player");
-  player.src = BASE + tracks[n];
+  const art = document.getElementById("art");
+
+  player.src = BASE + tracks[n].file;
+  art.src = tracks[n].art;
+
   player.play();
 }
 </script>
