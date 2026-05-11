@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Simple Music Tracks</title>
+  <title>Music Player – Simple Tracks</title>
   <style>
     * {
       box-sizing: border-box;
@@ -16,24 +16,24 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at top, #2b5876 0, #4e4376 40%, #050816 100%);
+      background: radial-gradient(circle at top, #1f2933 0, #020617 55%, #000 100%);
       color: #f9fafb;
     }
 
     .player-container {
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.95);
       border-radius: 18px;
-      padding: 28px 26px 24px;
+      padding: 26px 22px 20px;
       box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.55),
-        0 0 0 1px rgba(148, 163, 184, 0.15);
+        0 18px 45px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(148, 163, 184, 0.18);
       width: 100%;
-      max-width: 420px;
+      max-width: 460px;
       backdrop-filter: blur(18px);
     }
 
     .title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 600;
       margin-bottom: 4px;
       letter-spacing: 0.04em;
@@ -42,7 +42,7 @@
     .subtitle {
       font-size: 0.8rem;
       color: #9ca3af;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .divider {
@@ -53,28 +53,32 @@
         rgba(148, 163, 184, 0.7),
         rgba(148, 163, 184, 0)
       );
+      margin-bottom: 16px;
+    }
+
+    audio {
+      width: 100%;
       margin-bottom: 18px;
+      filter: drop-shadow(0 10px 25px rgba(15, 23, 42, 0.9));
     }
 
     .track-list {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
 
     .track-button {
-      width: 100%;
+      flex: 1 1 calc(50% - 10px);
+      min-width: 120px;
       border: none;
       border-radius: 999px;
-      padding: 10px 16px;
-      font-size: 0.9rem;
+      padding: 9px 14px;
+      font-size: 0.85rem;
       font-weight: 500;
       color: #e5e7eb;
       background: linear-gradient(135deg, #111827, #020617);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -96,20 +100,6 @@
       opacity: 0;
       transition: opacity 0.18s ease-out;
       pointer-events: none;
-    }
-
-    .track-button span.label {
-      z-index: 1;
-    }
-
-    .track-button span.badge {
-      z-index: 1;
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(15, 118, 110, 0.2);
-      color: #a5f3fc;
-      border: 1px solid rgba(45, 212, 191, 0.4);
     }
 
     .track-button:hover {
@@ -136,11 +126,7 @@
       font-size: 0.7rem;
       color: #6b7280;
       text-align: right;
-      margin-top: 6px;
-    }
-
-    a.button-link {
-      text-decoration: none;
+      margin-top: 4px;
     }
 
     @media (max-width: 480px) {
@@ -148,78 +134,60 @@
         margin: 16px;
         padding: 22px 18px 18px;
       }
+
+      .track-button {
+        flex: 1 1 100%;
+      }
     }
   </style>
 </head>
 <body>
   <div class="player-container">
-    <div class="title">Music Tracks</div>
-    <div class="subtitle">Click a track button to open or play the song file.</div>
+    <div class="title">Music Player</div>
+    <div class="subtitle">Press a track button to load and play it. No links, just the player.</div>
     <div class="divider"></div>
 
+    <!-- Single audio player -->
+    <audio id="audioPlayer" controls preload="none">
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Track buttons (no links) -->
     <div class="track-list">
-      <!-- Track 1 -->
-      <a
-        class="button-link"
-        href="https://github.com/Rohansweb-codexamples/Musicplayerspellingcheck55677-_---gncfj/raw/main/SONGSmashup-aimashupmaker-1778513456891900046.mp3"
-        target="_blank"
-      >
-        <button class="track-button">
-          <span class="label">TRACK 1</span>
-          <span class="badge">Mashup</span>
-        </button>
-      </a>
-
-      <!-- Track 2 -->
-      <a
-        class="button-link"
-        href="https://github.com/Rohansweb-codexamples/Musicplayerspellingcheck55677-_---gncfj/raw/main/screenrecorder-20260511-161025.mp3"
-        target="_blank"
-      >
-        <button class="track-button">
-          <span class="label">TRACK 2</span>
-          <span class="badge">Recording</span>
-        </button>
-      </a>
-
-      <!-- Track 3 -->
-      <a
-        class="button-link"
-        href="https://github.com/Rohansweb-codexamples/Musicplayerspellingcheck55677-_---gncfj/raw/main/Rapture%20Original%20Extended%20Mix%20feat%20Nadia%20Ali.mp3"
-        target="_blank"
-      >
-        <button class="track-button">
-          <span class="label">TRACK 3</span>
-          <span class="badge">Rapture</span>
-        </button>
-      </a>
-
-      <!-- Track 4 -->
-      <a
-        class="button-link"
-        href="https://github.com/Rohansweb-codexamples/Musicplayerspellingcheck55677-_---gncfj/raw/main/Neon_Dreams_Accelerate%20(Extended).mp3"
-        target="_blank"
-      >
-        <button class="track-button">
-          <span class="label">TRACK 4</span>
-          <span class="badge">Neon Dreams</span>
-        </button>
-      </a>
-
-      <!-- Track 5 -->
-      <a
-        class="button-link"
-        href="https://github.com/Rohansweb-codexamples/Musicplayerspellingcheck55677-_---gncfj/raw/main/16.1s%20Recording%20(Dec%2028%20@%2012_05%20PM)%20(Cover).mp3"
-        target="_blank"
-      >
-        <button class="track-button">
-          <span class="label">TRACK 5</span>
-          <span class="badge">Cover</span>
-        </button>
-      </a>
+      <button class="track-button" onclick="playTrack(1)">TRACK 1</button>
+      <button class="track-button" onclick="playTrack(2)">TRACK 2</button>
+      <button class="track-button" onclick="playTrack(3)">TRACK 3</button>
+      <button class="track-button" onclick="playTrack(4)">TRACK 4</button>
+      <button class="track-button" onclick="playTrack(5)">TRACK 5</button>
     </div>
 
-    <div class="footer-note">Links point to the raw files in your GitHub repo.</div>
+    <div class="footer-note">Files served from your GitHub Pages site.</div>
   </div>
+
+  <script>
+    // Base URL of your GitHub Pages site
+    const BASE_URL = "https://rohansweb-codexamples.github.io/Musicplayerspellingcheck55677-_---gncfj/";
+
+    // Map track numbers to file names on your site
+    const tracks = {
+      1: "SONGSmashup-aimashupmaker-1778513456891900046.mp3",
+      2: "screenrecorder-20260511-161025.mp3",
+      3: "Rapture%20Original%20Extended%20Mix%20feat%20Nadia%20Ali.mp3",
+      4: "Neon_Dreams_Accelerate%20(Extended).mp3",
+      5: "16.1s%20Recording%20(Dec%2028%20@%2012_05%20PM)%20(Cover).mp3"
+    };
+
+    function playTrack(number) {
+      const audio = document.getElementById("audioPlayer");
+      const fileName = tracks[number];
+
+      if (!fileName) return;
+
+      audio.src = BASE_URL + fileName;
+      audio.play().catch(() => {
+        // Autoplay might be blocked; user can press play manually
+      });
+    }
+  </script>
 </body>
 </html>
