@@ -1,193 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Music Player – Simple Tracks</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+<meta charset="UTF-8">
+<title>Simple Music Player</title>
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at top, #1f2933 0, #020617 55%, #000 100%);
-      color: #f9fafb;
-    }
+<style>
+  body {
+    background: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+  }
 
-    .player-container {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 18px;
-      padding: 26px 22px 20px;
-      box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.7),
-        0 0 0 1px rgba(148, 163, 184, 0.18);
-      width: 100%;
-      max-width: 460px;
-      backdrop-filter: blur(18px);
-    }
+  audio {
+    width: 100%;
+    margin-top: 20px;
+  }
 
-    .title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-      letter-spacing: 0.04em;
-    }
+  .btn {
+    width: 100%;
+    padding: 30px;
+    margin: 15px 0;
+    font-size: 32px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    background: #444;
+    color: white;
+    cursor: pointer;
+  }
 
-    .subtitle {
-      font-size: 0.8rem;
-      color: #9ca3af;
-      margin-bottom: 16px;
-    }
+  .btn:active {
+    background: #666;
+  }
+</style>
 
-    .divider {
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        rgba(148, 163, 184, 0),
-        rgba(148, 163, 184, 0.7),
-        rgba(148, 163, 184, 0)
-      );
-      margin-bottom: 16px;
-    }
-
-    audio {
-      width: 100%;
-      margin-bottom: 18px;
-      filter: drop-shadow(0 10px 25px rgba(15, 23, 42, 0.9));
-    }
-
-    .track-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .track-button {
-      flex: 1 1 calc(50% - 10px);
-      min-width: 120px;
-      border: none;
-      border-radius: 999px;
-      padding: 9px 14px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #e5e7eb;
-      background: linear-gradient(135deg, #111827, #020617);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition:
-        transform 0.12s ease-out,
-        box-shadow 0.12s ease-out,
-        background 0.15s ease-out,
-        color 0.15s ease-out;
-      box-shadow:
-        0 0 0 1px rgba(55, 65, 81, 0.9),
-        0 10px 25px rgba(15, 23, 42, 0.9);
-    }
-
-    .track-button::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.35), transparent 55%);
-      opacity: 0;
-      transition: opacity 0.18s ease-out;
-      pointer-events: none;
-    }
-
-    .track-button:hover {
-      transform: translateY(-1px);
-      box-shadow:
-        0 0 0 1px rgba(59, 130, 246, 0.9),
-        0 14px 30px rgba(15, 23, 42, 0.95);
-      background: linear-gradient(135deg, #020617, #020617);
-      color: #f9fafb;
-    }
-
-    .track-button:hover::before {
-      opacity: 1;
-    }
-
-    .track-button:active {
-      transform: translateY(0);
-      box-shadow:
-        0 0 0 1px rgba(59, 130, 246, 0.9),
-        0 6px 14px rgba(15, 23, 42, 0.9);
-    }
-
-    .footer-note {
-      font-size: 0.7rem;
-      color: #6b7280;
-      text-align: right;
-      margin-top: 4px;
-    }
-
-    @media (max-width: 480px) {
-      .player-container {
-        margin: 16px;
-        padding: 22px 18px 18px;
-      }
-
-      .track-button {
-        flex: 1 1 100%;
-      }
-    }
-  </style>
 </head>
 <body>
-  <div class="player-container">
-    <div class="title">Music Player</div>
-    <div class="subtitle">Press a track button to load and play it. No links, just the player.</div>
-    <div class="divider"></div>
 
-    <!-- Single audio player -->
-    <audio id="audioPlayer" controls preload="none">
-      Your browser does not support the audio element.
-    </audio>
+<h1>Music Player</h1>
 
-    <!-- Track buttons (no links) -->
-    <div class="track-list">
-      <button class="track-button" onclick="playTrack(1)">TRACK 1</button>
-      <button class="track-button" onclick="playTrack(2)">TRACK 2</button>
-      <button class="track-button" onclick="playTrack(3)">TRACK 3</button>
-      <button class="track-button" onclick="playTrack(4)">TRACK 4</button>
-      <button class="track-button" onclick="playTrack(5)">TRACK 5</button>
-    </div>
+<audio id="player" controls></audio>
 
-    <div class="footer-note">Files served from your GitHub Pages site.</div>
-  </div>
+<button class="btn" onclick="playTrack(1)">TRACK 1</button>
+<button class="btn" onclick="playTrack(2)">TRACK 2</button>
+<button class="btn" onclick="playTrack(3)">TRACK 3</button>
+<button class="btn" onclick="playTrack(4)">TRACK 4</button>
+<button class="btn" onclick="playTrack(5)">TRACK 5</button>
 
-  <script>
-    // Base URL of your GitHub Pages site
-    const BASE_URL = "https://rohansweb-codexamples.github.io/Musicplayerspellingcheck55677-_---gncfj/";
+<script>
+const BASE = "https://rohansweb-codexamples.github.io/Musicplayerspellingcheck55677-_---gncfj/";
 
-    // Map track numbers to file names on your site
-    const tracks = {
-      1: "SONGSmashup-aimashupmaker-1778513456891900046.mp3",
-      2: "screenrecorder-20260511-161025.mp3",
-      3: "Rapture%20Original%20Extended%20Mix%20feat%20Nadia%20Ali.mp3",
-      4: "Neon_Dreams_Accelerate%20(Extended).mp3",
-      5: "16.1s%20Recording%20(Dec%2028%20@%2012_05%20PM)%20(Cover).mp3"
-    };
+const tracks = {
+  1: "SONGSmashup-aimashupmaker-1778513456891900046.mp3",
+  2: "screenrecorder-20260511-161025.mp3",
+  3: "Rapture%20Original%20Extended%20Mix%20feat%20Nadia%20Ali.mp3",
+  4: "Neon_Dreams_Accelerate%20(Extended).mp3",
+  5: "16.1s%20Recording%20(Dec%2028%20@%2012_05%20PM)%20(Cover).mp3"
+};
 
-    function playTrack(number) {
-      const audio = document.getElementById("audioPlayer");
-      const fileName = tracks[number];
+function playTrack(n) {
+  const player = document.getElementById("player");
+  player.src = BASE + tracks[n];
+  player.play();
+}
+</script>
 
-      if (!fileName) return;
-
-      audio.src = BASE_URL + fileName;
-      audio.play().catch(() => {
-        // Autoplay might be blocked; user can press play manually
-      });
-    }
-  </script>
 </body>
 </html>
